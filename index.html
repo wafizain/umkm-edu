@@ -1,0 +1,2102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMKM Maju Digital - Platform Edukasi UMKM Indonesia</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Product Sans Font -->
+    <link href="https://fonts.cdnfonts.com/css/product-sans" rel="stylesheet">
+    
+    <style>
+        /* Apply Product Sans Font */
+        * {
+            font-family: 'Product Sans', sans-serif;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #2563eb, #1d4ed8);
+            border-radius: 10px;
+            border: 2px solid #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #1d4ed8, #1e40af);
+        }
+        
+        /* Firefox Scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #2563eb #f1f5f9;
+        }
+        
+        /* Custom Navbar Styles */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .navbar-wrapper {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            padding: 0 20px;
+            animation: slideDown 0.8s ease-out;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-wrapper.scrolled {
+            top: 0;
+            padding: 10px 20px;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Gradient animation background */
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .navbar:hover::before {
+            left: 100%;
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.98) !important;
+            padding: 0.7rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #2563eb !important;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .navbar-brand:hover {
+            transform: scale(1.1) rotate(-5deg);
+            text-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+        }
+        
+        .navbar-brand i {
+            margin-right: 0.5rem;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: #374151 !important;
+            margin: 0 0.3rem;
+            padding: 0.5rem 1rem !important;
+            transition: all 0.3s ease;
+            position: relative;
+            border-radius: 20px;
+            z-index: 1;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+            z-index: -1;
+        }
+        
+        .nav-link:hover::before {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: #2563eb !important;
+            transform: translateY(-3px);
+        }
+        
+        .nav-link.active {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(29, 78, 216, 0.1));
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        }
+        
+        /* Stagger animation for nav items */
+        .nav-item {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+        
+        .nav-item:nth-child(1) { animation-delay: 0.1s; }
+        .nav-item:nth-child(2) { animation-delay: 0.2s; }
+        .nav-item:nth-child(3) { animation-delay: 0.3s; }
+        .nav-item:nth-child(4) { animation-delay: 0.4s; }
+        .nav-item:nth-child(5) { animation-delay: 0.5s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-toggler:hover {
+            transform: rotate(90deg);
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        /* Pulse effect on scroll */
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+            }
+            50% {
+                box-shadow: 0 5px 40px rgba(37, 99, 235, 0.3);
+            }
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 991px) {
+            .navbar {
+                border-radius: 30px;
+                padding: 1rem 1.5rem;
+            }
+            
+            .navbar-collapse {
+                margin-top: 1rem;
+            }
+            
+            .nav-link {
+                margin: 0.2rem 0;
+            }
+            
+            .btn-primary-custom {
+                margin-top: 0.5rem;
+                width: 100%;
+            }
+        }
+        
+        /* Hero Section Styles */
+        .hero-section {
+            position: relative;
+            background: #ffffff;
+            overflow: hidden;
+            padding: 2rem 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+        
+        .gradient-text {
+            color: #2563eb;
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+        
+        .btn-hero-primary {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+            display: inline-block;
+        }
+        
+        .btn-hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+            color: white;
+        }
+        
+        .btn-hero-secondary {
+            background: white;
+            color: #2563eb;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        
+        .btn-hero-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            color: #1d4ed8;
+        }
+        
+        /* Responsive Hero */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+            }
+            
+            .btn-hero-primary,
+            .btn-hero-secondary {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+            
+            /* Adjust decorative elements for mobile */
+            .deco-line {
+                width: 200px;
+            }
+            
+            .line-1 {
+                width: 200px;
+                top: 15%;
+            }
+            
+            .line-2 {
+                width: 250px;
+                top: 65%;
+            }
+            
+            .line-3 {
+                width: 180px;
+                bottom: 20%;
+            }
+            
+            .square-1 {
+                width: 50px;
+                height: 50px;
+                top: 12%;
+                left: 5%;
+            }
+            
+            .square-2 {
+                width: 40px;
+                height: 40px;
+                top: 75%;
+                right: 8%;
+            }
+            
+            .square-3 {
+                width: 35px;
+                height: 35px;
+                bottom: 15%;
+                left: 10%;
+            }
+            
+            .deco-dots {
+                width: 60px;
+                height: 60px;
+                background-size: 15px 15px;
+            }
+            
+            .dots-1 {
+                top: 25%;
+                right: 5%;
+            }
+            
+            .dots-2 {
+                bottom: 25%;
+                left: 5%;
+            }
+        }
+        
+        /* Hero Decorative Elements */
+        .hero-decorations {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        /* Decorative Lines */
+        .deco-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #2563eb, transparent);
+            opacity: 0.15;
+            animation: slideRight 8s ease-in-out infinite;
+        }
+        
+        .line-1 {
+            width: 300px;
+            height: 2px;
+            top: 20%;
+            left: -300px;
+            animation-delay: 0s;
+        }
+        
+        .line-2 {
+            width: 400px;
+            height: 2px;
+            top: 60%;
+            right: -400px;
+            animation: slideLeft 10s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        
+        .line-3 {
+            width: 250px;
+            height: 2px;
+            bottom: 25%;
+            left: -250px;
+            animation-delay: 4s;
+        }
+        
+        @keyframes slideRight {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(calc(100vw + 300px));
+            }
+        }
+        
+        @keyframes slideLeft {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(calc(-100vw - 400px));
+            }
+        }
+        
+        /* Decorative Squares */
+        .deco-square {
+            position: absolute;
+            border: 3px solid #2563eb;
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .square-1 {
+            width: 80px;
+            height: 80px;
+            top: 15%;
+            left: 10%;
+            transform: rotate(45deg);
+            animation-delay: 0s;
+        }
+        
+        .square-2 {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            right: 15%;
+            transform: rotate(25deg);
+            animation-delay: 2s;
+        }
+        
+        .square-3 {
+            width: 50px;
+            height: 50px;
+            bottom: 20%;
+            left: 15%;
+            transform: rotate(-15deg);
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(45deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(45deg);
+            }
+        }
+        
+        /* Decorative Dots Pattern */
+        .deco-dots {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-image: radial-gradient(circle, #2563eb 2px, transparent 2px);
+            background-size: 20px 20px;
+            opacity: 0.15;
+            animation: fadeInOut 4s ease-in-out infinite;
+        }
+        
+        .dots-1 {
+            top: 30%;
+            right: 8%;
+            animation-delay: 0s;
+        }
+        
+        .dots-2 {
+            bottom: 30%;
+            left: 8%;
+            animation-delay: 2s;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.25;
+            }
+        }
+        
+        /* Masalah UMKM Section Styles */
+        .masalah-section {
+            padding: 5rem 0;
+            background: white;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 1rem;
+        }
+        
+        .text-blue {
+            color: #2563eb;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .problem-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .problem-card:hover {
+            border-color: #2563eb;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+        }
+        
+        .problem-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .problem-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .problem-icon i {
+            font-size: 2rem;
+            color: #2563eb;
+        }
+        
+        .problem-card:hover .problem-icon {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .problem-card:hover .problem-icon i {
+            color: white;
+        }
+        
+        .problem-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 1rem;
+        }
+        
+        .problem-desc {
+            font-size: 1rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .solution-cta {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            border: 2px solid #bfdbfe;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-desc {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-cta-primary {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+            display: inline-block;
+        }
+        
+        .btn-cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+            color: white;
+        }
+        
+        /* Responsive Masalah Section */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
+            
+            .problem-card {
+                padding: 1.5rem;
+            }
+            
+            .solution-cta {
+                padding: 2rem 1.5rem;
+            }
+            
+            .cta-title {
+                font-size: 1.5rem;
+            }
+            
+            .cta-desc {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Scroll Animation Styles */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .scroll-animate.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Stagger delay for multiple elements */
+        .scroll-animate:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+        
+        .scroll-animate:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+        
+        .scroll-animate:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+        
+        .scroll-animate:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+        
+        .scroll-animate:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+        
+        /* Solusi Teknologi Section Styles */
+        .solusi-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .solusi-content {
+            padding-right: 2rem;
+        }
+        
+        .solusi-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.1);
+        }
+        
+        .solusi-badge i {
+            color: #2563eb;
+            font-size: 1.2rem;
+        }
+        
+        .solusi-badge span {
+            color: #2563eb;
+            font-weight: 600;
+        }
+        
+        .solusi-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .solusi-desc {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .solusi-features {
+            margin-bottom: 2rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+        
+        .feature-icon {
+            flex-shrink: 0;
+        }
+        
+        .feature-icon i {
+            color: #2563eb;
+            font-size: 1.5rem;
+        }
+        
+        .feature-text h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 0.3rem;
+        }
+        
+        .feature-text p {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin: 0;
+        }
+        
+        .btn-solusi-primary {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+            display: inline-block;
+        }
+        
+        .btn-solusi-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+            color: white;
+        }
+        
+        /* Solusi Visual */
+        .tools-grid {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tools-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .tool-category {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .tool-category:last-of-type {
+            border-bottom: none;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0;
+        }
+        
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2563eb;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .category-title i {
+            font-size: 1.3rem;
+        }
+        
+        .tool-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        
+        .tool-badge {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            color: #1e40af;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 2px solid #bfdbfe;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+        }
+        
+        .tool-badge:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .tools-note {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            padding: 1.2rem;
+            border-radius: 15px;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            border: 2px solid #fcd34d;
+        }
+        
+        .tools-note i {
+            color: #d97706;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+        
+        .tools-note p {
+            color: #92400e;
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+        
+        /* Responsive Solusi Section */
+        @media (max-width: 991px) {
+            .solusi-content {
+                padding-right: 0;
+                margin-bottom: 3rem;
+            }
+            
+            .solusi-title {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                padding: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .tools-grid {
+                padding: 1.5rem;
+            }
+            
+            .tools-title {
+                font-size: 1.3rem;
+            }
+            
+            .category-title {
+                font-size: 1rem;
+            }
+            
+            .tool-badge {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+        
+        /* Video Edukasi Section Styles */
+        .video-section {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.15);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+            background: #e5e7eb;
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.1);
+        }
+        
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: white;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .video-card:hover .play-button {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .video-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+        
+        .video-desc {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .video-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+        
+        .video-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
+        .video-meta i {
+            font-size: 1rem;
+        }
+        
+        .btn-video-more {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .btn-video-more:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+            color: white;
+        }
+        
+        .btn-video-more i {
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-video-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Responsive Video Section */
+        @media (max-width: 768px) {
+            .video-title {
+                font-size: 1rem;
+            }
+            
+            .video-desc {
+                font-size: 0.9rem;
+            }
+            
+            .play-button {
+                font-size: 3rem;
+            }
+        }
+        
+        /* Manfaat Section Styles */
+        .manfaat-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            position: relative;
+        }
+        
+        .manfaat-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .manfaat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .manfaat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+            border-color: #2563eb;
+        }
+        
+        .manfaat-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .manfaat-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .manfaat-icon i {
+            font-size: 2.5rem;
+            color: #2563eb;
+            transition: all 0.3s ease;
+        }
+        
+        .manfaat-card:hover .manfaat-icon {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .manfaat-card:hover .manfaat-icon i {
+            color: white;
+        }
+        
+        .manfaat-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 1rem;
+        }
+        
+        .manfaat-desc {
+            font-size: 1rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        /* Responsive Manfaat Section */
+        @media (max-width: 768px) {
+            .manfaat-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .manfaat-icon {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .manfaat-icon i {
+                font-size: 2rem;
+            }
+            
+            .manfaat-title {
+                font-size: 1.1rem;
+            }
+            
+            .manfaat-desc {
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* CTA Section Styles */
+        .cta-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        
+        .cta-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-content {
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .cta-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta-primary {
+            background: white;
+            color: #2563eb;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .btn-cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            color: #1d4ed8;
+        }
+        
+        .btn-cta-secondary {
+            background: transparent;
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .btn-cta-secondary:hover {
+            background: white;
+            color: #2563eb;
+            transform: translateY(-3px);
+        }
+        
+        .cta-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+        
+        /* Responsive CTA Section */
+        @media (max-width: 768px) {
+            .cta-box {
+                padding: 3rem 2rem;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+            
+            .cta-description {
+                font-size: 1rem;
+            }
+            
+            .btn-cta-primary,
+            .btn-cta-secondary {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .cta-stats {
+                gap: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* Footer Section Styles */
+        .footer-section {
+            background: white;
+            padding: 4rem 0 2rem;
+            color: #1e293b;
+            border-top: 3px solid #e5e7eb;
+            border-radius: 50px 50px 0 0;
+            margin-top: -50px;
+            position: relative;
+        }
+        
+        .footer-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-desc {
+            color: #64748b;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: #2563eb;
+            transform: translateY(-3px);
+            color: white;
+        }
+        
+        .social-link i {
+            font-size: 1.2rem;
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links ul li a {
+            color: #64748b;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-links ul li a:hover {
+            color: #2563eb;
+            transform: translateX(5px);
+        }
+        
+        .footer-contact ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-contact ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            color: #64748b;
+        }
+        
+        .footer-contact ul li i {
+            color: #2563eb;
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .copyright {
+            color: #64748b;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        /* Responsive Footer */
+        @media (max-width: 768px) {
+            .footer-section {
+                padding: 3rem 0 1.5rem;
+            }
+            
+            .footer-about,
+            .footer-links,
+            .footer-contact {
+                margin-bottom: 2rem;
+            }
+            
+            .footer-brand {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Hero Section with Navbar -->
+    <section id="home" class="hero-section">
+        <!-- Navbar -->
+        <div class="navbar-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#home">
+                        <i class="bi bi-lightbulb"></i>
+                        UMKM Edu
+                    </a>
+                    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto align-items-center">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#home">Beranda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#masalah">Materi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#manfaat">Manfaat</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#solusi">Tools</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#testimoni">Testimoni</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-12 text-center">
+                    <div class="hero-content">
+                        <h1 class="hero-title">
+                            Platform <span class="gradient-text">Edukasi</span></span> untuk<br>
+                            Mengembangkan UMKM
+                        </h1>
+                        <p class="hero-description">
+                           Belajar memanfaatkan teknologi sederhana agar usaha lebih rapi, cepat, dan berkembang.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#materi" class="btn btn-hero-primary">
+                                Mulai Belajar
+                            </a>
+                            <a href="#tentang" class="btn btn-hero-secondary">
+                                Tonton Video
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Decorative Elements -->
+            <div class="hero-decorations">
+                <!-- Lines -->
+                <div class="deco-line line-1"></div>
+                <div class="deco-line line-2"></div>
+                <div class="deco-line line-3"></div>
+                
+                <!-- Squares -->
+                <div class="deco-square square-1"></div>
+                <div class="deco-square square-2"></div>
+                <div class="deco-square square-3"></div>
+                
+                <!-- Dots Pattern -->
+                <div class="deco-dots dots-1"></div>
+                <div class="deco-dots dots-2"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Masalah UMKM Section -->
+    <section id="masalah" class="masalah-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5 scroll-animate">
+                    <h2 class="section-title">Tantangan yang Dihadapi <span class="text-blue">UMKM</span></h2>
+                    <p class="section-subtitle">Berbagai kendala yang sering menghambat perkembangan bisnis UMKM di Indonesia</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6 scroll-animate">
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="bi bi-journal-text"></i>
+                        </div>
+                        <h3 class="problem-title">Catatan Masih Manual</h3>
+                        <p class="problem-desc">Pencatatan transaksi dan keuangan masih menggunakan cara manual yang rentan kesalahan</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 scroll-animate">
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+                        <h3 class="problem-title">Waktu Kerja Tidak Efisien</h3>
+                        <p class="problem-desc">Banyak waktu terbuang untuk pekerjaan yang sebenarnya bisa diotomatisasi</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 scroll-animate">
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="bi bi-megaphone"></i>
+                        </div>
+                        <h3 class="problem-title">Promosi Belum Maksimal</h3>
+                        <p class="problem-desc">Belum optimal dalam memanfaatkan digital marketing dan media sosial untuk promosi</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 scroll-animate">
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="bi bi-folder-x"></i>
+                        </div>
+                        <h3 class="problem-title">Data Usaha Tidak Rapi</h3>
+                        <p class="problem-desc">Pengelolaan data dan dokumen usaha yang tidak terorganisir dengan baik</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solusi Teknologi Section -->
+    <section id="solusi" class="solusi-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5 scroll-animate">
+                    <h2 class="section-title">Solusi <span class="text-blue">Teknologi</span> untuk UMKM</h2>
+                    <p class="section-subtitle">Berbagai tools dan platform digital yang dapat membantu mengembangkan bisnis UMKM Anda</p>
+                </div>
+            </div>
+            
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6 scroll-animate">
+                    <div class="solusi-content">
+                        <!-- <div class="solusi-badge">
+                            <i class="bi bi-lightbulb"></i>
+                            <span>Solusi Digital</span>
+                        </div> -->
+                        <h3 class="solusi-title">Transformasi Digital untuk Bisnis Anda</h3>
+                        <p class="solusi-desc">Manfaatkan teknologi digital untuk meningkatkan efisiensi operasional, memperluas jangkauan pasar, dan mengembangkan bisnis UMKM Anda ke level berikutnya.</p>
+                        
+                        <div class="solusi-features">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Sistem Pencatatan Digital</h4>
+                                    <p>Google Sheets, Excel Online, Zoho Books untuk kelola keuangan dan transaksi</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Kelola Pelanggan</h4>
+                                    <p>WhatsApp Business, Telegram, Instagram DM untuk komunikasi dan layanan pelanggan</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Digital Marketing & Promosi</h4>
+                                    <p>Canva, CapCut, Facebook Ads, Instagram Ads untuk konten dan promosi menarik</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Manajemen Data</h4>
+                                    <p>Notion, Trello, Google Drive untuk kelola data dan dokumen usaha dengan rapi</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="#materi" class="btn btn-solusi-primary">Pelajari Lebih Lanjut</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 scroll-animate">
+                    <div class="tools-grid">
+                        <h3 class="tools-title">Tools & Platform yang Bisa Digunakan</h3>
+                        
+                        <div class="tool-category">
+                            <h4 class="category-title">
+                                <i class="bi bi-journal-text"></i>
+                                Pencatatan & Keuangan
+                            </h4>
+                            <div class="tool-items">
+                                <a href="https://www.google.com/sheets/about/" target="_blank" class="tool-badge">Google Sheets</a>
+                                <a href="https://www.zoho.com/books/" target="_blank" class="tool-badge">Zoho Books</a>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-category">
+                            <h4 class="category-title">
+                                <i class="bi bi-chat-dots"></i>
+                                Komunikasi Pelanggan
+                            </h4>
+                            <div class="tool-items">
+                                <a href="https://www.whatsapp.com/business" target="_blank" class="tool-badge">WhatsApp Business</a>
+                                <a href="https://telegram.org/" target="_blank" class="tool-badge">Telegram</a>
+                                <a href="https://www.instagram.com/" target="_blank" class="tool-badge">Instagram DM</a>
+                                <a href="https://www.messenger.com/" target="_blank" class="tool-badge">Facebook Messenger</a>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-category">
+                            <h4 class="category-title">
+                                <i class="bi bi-megaphone"></i>
+                                Marketing & Design
+                            </h4>
+                            <div class="tool-items">
+                                <a href="https://www.canva.com/" target="_blank" class="tool-badge">Canva</a>
+                                <a href="https://www.capcut.com/" target="_blank" class="tool-badge">CapCut</a>
+                                <a href="https://www.facebook.com/business/ads" target="_blank" class="tool-badge">Facebook Ads</a>
+                                <a href="https://business.instagram.com/advertising" target="_blank" class="tool-badge">Instagram Ads</a>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-category">
+                            <h4 class="category-title">
+                                <i class="bi bi-folder"></i>
+                                Manajemen & Produktivitas
+                            </h4>
+                            <div class="tool-items">
+                                <a href="https://www.notion.so/" target="_blank" class="tool-badge">Notion</a>
+                                <a href="https://trello.com/" target="_blank" class="tool-badge">Trello</a>
+                                <a href="https://www.google.com/drive/" target="_blank" class="tool-badge">Google Drive</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Video Edukasi Section -->
+    <section id="video" class="video-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5 scroll-animate">
+                    <h2 class="section-title">Video <span class="text-blue">Edukasi</span> UMKM</h2>
+                    <p class="section-subtitle">Pelajari berbagai tips dan strategi untuk mengembangkan bisnis UMKM Anda melalui video Edukasi</p>
+                </div>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-5 col-md-6 scroll-animate">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/400x225/2563eb/ffffff?text=Video+Tutorial+1" alt="Video 1">
+                            <div class="play-button">
+                                <i class="bi bi-play-circle-fill"></i>
+                            </div>
+                            <div class="video-duration">12:30</div>
+                        </div>
+                        <div class="video-content">
+                            <h3 class="video-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore possimus inventore illo</h3>
+                            <p class="video-desc">quia facilis in reiciendis ipsa consectetur vero nobis placeat perferendis! Explicabo ducimus doloremque provident voluptatem hic velit omnis?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-5 col-md-6 scroll-animate">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/400x225/2563eb/ffffff?text=Video+Tutorial+2" alt="Video 2">
+                            <div class="play-button">
+                                <i class="bi bi-play-circle-fill"></i>
+                            </div>
+                            <div class="video-duration">15:45</div>
+                        </div>
+                        <div class="video-content">
+                           <h3 class="video-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore possimus inventore illo</h3>
+                            <p class="video-desc">quia facilis in reiciendis ipsa consectetur vero nobis placeat perferendis! Explicabo ducimus doloremque provident voluptatem hic velit omnis?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-lg-12 text-center scroll-animate">
+                    <a href="#materi" class="btn btn-video-more">
+                        Lihat Semua Video
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Manfaat Section -->
+    <section id="manfaat" class="manfaat-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5 scroll-animate">
+                    <h2 class="section-title">Manfaat <span class="text-blue">Menggunakan</span> Teknologi Digital</h2>
+                    <p class="section-subtitle">Berbagai keuntungan yang akan Anda dapatkan dengan menerapkan solusi digital</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6 scroll-animate">
+                    <div class="manfaat-card">
+                        <div class="manfaat-icon">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+                        <h3 class="manfaat-title">Hemat Waktu Kerja</h3>
+                        <p class="manfaat-desc">Otomatisasi proses bisnis menghemat waktu hingga 50% untuk fokus pada hal penting</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 scroll-animate">
+                    <div class="manfaat-card">
+                        <div class="manfaat-icon">
+                            <i class="bi bi-folder-check"></i>
+                        </div>
+                        <h3 class="manfaat-title">Usaha Lebih Rapi</h3>
+                        <p class="manfaat-desc">Data dan dokumen terorganisir dengan baik, mudah diakses kapan saja</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 scroll-animate">
+                    <div class="manfaat-card">
+                        <div class="manfaat-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3 class="manfaat-title">Minim Kesalahan</h3>
+                        <p class="manfaat-desc">Sistem digital mengurangi human error dalam pencatatan dan perhitungan</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 scroll-animate">
+                    <div class="manfaat-card">
+                        <div class="manfaat-icon">
+                            <i class="bi bi-star"></i>
+                        </div>
+                        <h3 class="manfaat-title">Terlihat Profesional</h3>
+                        <p class="manfaat-desc">Tingkatkan kredibilitas bisnis dengan sistem dan tampilan yang profesional</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section id="cta" class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cta-box scroll-animate">
+                        <div class="cta-content">
+                            <h2 class="cta-title">Siap Mengembangkan Bisnis UMKM Anda?</h2>
+                            <p class="cta-description">Mulai perjalanan transformasi digital Anda sekarang dan tingkatkan bisnis UMKM ke level berikutnya dengan tools dan strategi yang tepat</p>
+                            <div class="cta-buttons">
+                                <a href="#materi" class="btn btn-cta-primary">
+                                    <i class="bi bi-play-circle me-2"></i>
+                                    Mulai Belajar Sekarang
+                                </a>
+                                <a href="#video" class="btn btn-cta-secondary">
+                                    <i class="bi bi-collection-play me-2"></i>
+                                    Lihat Video Edukasi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Section -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-about">
+                        <h3 class="footer-brand">UMKM Edu</h3>
+                        <h4 class="footer-title">Tentang Website</h4>
+                        <p class="footer-desc">Platform edukasi digital untuk membantu UMKM Indonesia berkembang dan bersaing di era digital melalui pembelajaran teknologi dan tools modern.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Menu Cepat</h4>
+                        <ul>
+                            <li><a href="#home">Beranda</a></li>
+                            <li><a href="#masalah">Masalah UMKM</a></li>
+                            <li><a href="#solusi">Solusi Teknologi</a></li>
+                            <li><a href="#video">Video Edukasi</a></li>
+                            <li><a href="#manfaat">Manfaat</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Anggota Kelompok</h4>
+                        <ul>
+                            <li><a href="#">Fadil Fathurrahman</a></li>
+                            <li><a href="#">Kiki Kurnia</a></li>
+                            <li><a href="#">Marzuq Jangkaru Bhakti Samudra</a></li>
+                            <li><a href="#">Nasha Janu Erlangga</a></li>
+                            <li><a href="#">Naura Sayyidah Maryam</a></li>
+                            <li><a href="#">Wafi Muhammad Zain</a></li>
+                            <li><a href="#">Zalfaa` Az-Zahra</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-contact">
+                        <h4 class="footer-title">Mata Kuliah & Institusi</h4>
+                        <ul>
+                            <li>
+                                <i class="bi bi-book"></i>
+                                <span>Mata Kuliah: Literasi Digital</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-building"></i>
+                                <span>Institusi: Universitas Teknologi Bandung</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-person"></i>
+                                <span>Dosen: Kannisa Adjani, S.kom., M.Kom.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <p class="copyright">&copy; 2026 Proyek UAS Edukasi UMKM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript for Navbar Animation -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            const navbarWrapper = document.querySelector('.navbar-wrapper');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+                navbarWrapper.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+                navbarWrapper.classList.remove('scrolled');
+            }
+        });
+        
+        // Active link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close mobile menu after click
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarCollapse.classList.remove('show');
+                    }
+                }
+            });
+        });
+        
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all elements with scroll-animate class
+        document.querySelectorAll('.scroll-animate').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+    
+</body>
+</html>
